@@ -1,0 +1,68 @@
+#include<stdio.h>
+#include<conio.h>
+#define size 3
+int a[size];
+int top=-1;
+void push(int);
+void pop();
+void display();
+
+void  main()
+{
+    int op,x;
+    while(1)
+    {
+    printf("     Menu     \n");
+    printf("1.Push \n2.Pop \n3.Display \n4.Exit \n");
+    scanf("%d",&op);
+    switch(op)
+    {
+        case 1: if(top>=size-1)
+                {
+                    printf("Stack is Full \n");
+                }
+                else
+                {
+                    printf("Enter the value to be inserted \n");
+                    scanf("%d",&x);
+                    push(x);
+                }
+                break;
+        case 2: if(top==-1)
+                 {
+                     printf("Stack is empty \n");
+                 }
+                 else pop();
+                 break;
+        case 3: if(top==-1)
+                {
+                    printf("Stack is empty \n");
+                }
+                else
+                {display();}
+                break;
+        case 4: exit(0);
+        default: printf("Incorrect Option \n");
+    }
+    }
+    }
+
+void push(int x)
+{
+    top++;
+    a[top]=x;
+}
+
+void pop()
+{
+    printf("Element %d is removed from stack \n",a[top]);
+    top--;
+}
+
+void display()
+{
+    int i;
+    for(i=0;i<=top;i++)
+        printf("%d ",a[i]);
+        printf("\n");
+}
