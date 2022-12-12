@@ -3,32 +3,87 @@
 
 struct node
 {
-
     int data;
-    struct node * next;
+    struct node *next;
 };
-struct node * head;
+struct node *head;
 
 void beginsert()
 {
-    struct node * ptr;
+    struct node *ptr;
     int item;
-    ptr=(struct node *) malloc(sizeof(struct node*));
+    ptr=(struct node*)malloc(sizeof(struct node));
     if(ptr==NULL)
-    {
-        printf("\n overflow");
-    }
+        printf("Overflow\n");
     else
     {
-
-        printf("\n Enter value");
-        scanf("%d", &item);
-        ptr->data=item;
-        ptr->next=head;
-        head=ptr;
-        printf("\n node inserted");
+     printf("Enter value \n");
+     scanf("%d",&item);
+     ptr->data=item;
+     ptr->next=head;
+     head=ptr;
+     printf("Node inserted \n");
     }
 }
+void endinsert()
+{
+    struct node *ptr, *temp;
+    int item;
+    ptr=(struct node *)malloc(sizeof(struct node));
+    if(ptr==NULL)
+    printf("Overflow \n");
+    else
+    {
+     printf("Enter value \n");
+     scanf("%d",&item);
+     ptr->data=item;
+        if(head==NULL)
+        {
+            head=ptr;
+            ptr->next=NULL;
+        }
+        else
+        {
+            temp=head;
+            while(temp->next!=NULL)
+            temp=temp->next;
+            temp->next=ptr;
+            ptr->next=NULL;
+        }
+    }
+}
+
+
+void randominsert()
+{
+    int i,n,item;
+    struct node *ptr,*temp;
+    ptr=(struct node *)malloc(sizeof(struct node));
+    if(ptr==NULL)
+    printf("Overflow \n");
+    else
+    {
+        printf("Enter value \n");
+        scanf("%d",&item);
+        ptr->data=item;
+        printf("Enter location at which you want to enter ");
+        scanf("%d",&n);
+        temp=head;
+        for(i=1;i<n;i++)
+        {
+            temp=temp->next;
+            if(temp==NULL)
+            {
+                printf("\nCan't insert \n");
+                return;
+            }
+        }
+        ptr->next=temp->next;
+        temp->next=ptr;
+        printf("\nNode inserted \n");
+    }
+}
+
 void display()
 {
     struct node *ptr;
@@ -50,23 +105,37 @@ void display()
 
 void main()
 {
-
-    int choice;
-    while(choice!=3)
+    int ch;
+    while(ch !=9)
     {
-        printf("\nmenu\n");
-        printf("1.beginsert\n 2.display\n3.exit\n");
-        printf("enter your choice\n");
-        scanf("%d",&choice);
-        switch(choice)
+        printf("\n \n1.Insert \n2.End insert \n3.randominsert \n4.Display \n9.Exit \n\n");
+        scanf("%d",&ch);
+        switch(ch)
         {
-            case 1:beginsert();
-                   break;
-            case 2:display();
-                   break;
-            case 3:exit(0);
-            default:printf("wrong insertion");
+            case 1:
+                {
+                beginsert();
+                break;
+                }
+            case 2:
+                {
+                    endinsert();
+                        break;
+                }
+            case 3:
+                {
+                    randominsert();
+                    break;
+                }
+            case 4:
+                {
+                    display();
+                    break;
+                }
 
+            case 9:
+                exit(0);
         }
     }
 }
+
