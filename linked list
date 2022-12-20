@@ -54,7 +54,7 @@ void endinsert()
 }
 
 
-void randominsert()
+void insertpos()
 {
     int i,n,item;
     struct node *ptr,*temp;
@@ -69,7 +69,7 @@ void randominsert()
         printf("Enter location at which you want to enter ");
         scanf("%d",&n);
         temp=head;
-        for(i=1;i<n;i++)
+        for(i=2;i<n;i++)
         {
             temp=temp->next;
             if(temp==NULL)
@@ -83,7 +83,6 @@ void randominsert()
         printf("\nNode inserted \n");
     }
 }
-
 void display()
 {
     struct node *ptr;
@@ -102,13 +101,124 @@ void display()
 
 }
 
+void begdelete()
+{
+    struct node *ptr;
+    if(head==NULL)
+    printf("List is empty \n");
+    else
+    {
+        ptr=head;
+        head=ptr->next;
+        free(ptr);
+        printf("Node deleted at beginning \n");
+    }
+}
 
+void deletepos()
+{
+    struct node *ptr,*temp;
+    int n,i;
+    printf("Enter position \n");
+    scanf("%d",&n);
+    ptr=head;
+    for(i=1;i<n;i++)
+    {
+        temp=ptr;
+        ptr=ptr->next;
+        if(ptr==NULL)
+        {
+            printf("Cant delete \n");
+            return;
+        }
+    }
+        temp->next=ptr->next;
+        free(ptr);
+        printf("Node deleted at %d position ",n+1);
+}
+
+void lastdelete()
+{
+    struct node *ptr,*temp;
+    if(head==NULL)
+    printf("List is empty \n");
+    else if(head->next==NULL)
+    {
+        free(head);
+        printf("Only one node of the list is deleted \n");
+    }
+    else
+    {
+        ptr=head;
+        ptr = head;
+        while(ptr->next != NULL)
+        {
+            temp = ptr;
+            ptr = ptr ->next;
+        }
+        temp->next=NULL;
+        free(ptr);
+        printf("Last node of Linked list got deleted \n");
+    }
+}
+int search()
+{
+    struct node *ptr;
+    int d,i=1,flag=0;
+    ptr=head;
+    if(head==NULL)
+    {
+        printf("Empty \n");
+    }
+    else
+    {
+        printf("Enter the data you want to delete \n");
+        scanf("%d",&d);
+        while(ptr!=NULL)
+        {
+            if(ptr->data==d)
+            {
+                return (i);
+            }
+            i++;
+            ptr=ptr->next;
+        }
+        flag=1;
+        if(flag==1)
+        return (NULL);
+    }
+}
+void deleteele()
+{
+    int i,data;
+    struct node *ptr,*temp;
+    data=search();
+    if(data==NULL)
+    {
+       printf("Element not found");
+        return;
+    }
+       ptr=head;
+     for(i=1;i<data;i++)
+    {
+        temp=ptr;
+        ptr=ptr->next;
+        if(ptr==NULL)
+        {
+            printf("Cant delete \n");
+            return;
+        }
+    }
+        temp->next=ptr->next;
+        free(ptr);
+        printf("Node deleted ");
+}
 void main()
 {
     int ch;
     while(ch !=9)
     {
-        printf("\n \n1.Insert \n2.End insert \n3.randominsert \n4.Display \n9.Exit \n\n");
+        printf("\n \n1.Insert \n2.End insert \n3.Insert at position \n4.Delete at beginning \n5.Delete at position \n6.Delete at end \n7.Delete element \n8.Display \n9.Exit \n\n");
         scanf("%d",&ch);
         switch(ch)
         {
@@ -124,10 +234,30 @@ void main()
                 }
             case 3:
                 {
-                    randominsert();
+                    insertpos();
                     break;
                 }
             case 4:
+                {
+                    begdelete();
+                    break;
+                }
+            case 5:
+                {
+                    deletepos();
+                    break;
+                }
+            case 6:
+                {
+                    lastdelete();
+                    break;
+                }
+            case 7:
+                {
+                    deleteele();
+                    break;
+                }
+            case 8:
                 {
                     display();
                     break;
@@ -138,4 +268,5 @@ void main()
         }
     }
 }
+
 
